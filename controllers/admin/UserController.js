@@ -19,6 +19,39 @@ const UserController = {
          res.header("Authorization",token);
          res.send({
             ActionType:"OK",
+            token:token,
+            username:result[0].username,
+            gender:result[0].gender?result[0].gender:0,//性别0，1，2
+            introudction:result[0].introudction,//介绍
+            avatar:result[0].avatar,//头像
+            role:result[0].role,//角色
+         })
+      }
+   },
+   upload:async (req,res) => {
+      const {username,introduction,gender} = req.body;
+      const token = req.headers["authorization"].split(" ")[1];
+      const avatar = req.file?`/avataruploads/${req.file.filename}`:"";
+      var payload = JWT.verify(token);
+      await UserService.upload({_id:payload._id,username,introduction,gender:Number(gender),avatar});
+      if(avatar){
+         res.send({
+            ActionType:"OK",
+            data:{
+               username:username,
+               introudction:introduction,
+               gender:Number(gender),
+               avatar
+            }
+         })
+      }else{
+         res.send({
+            ActionType:"OK",
+            data:{
+               username:username,
+               introduction:introduction,
+               gender:Number(gender),
+            }
          })
       }
    },

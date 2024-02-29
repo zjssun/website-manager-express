@@ -5,7 +5,7 @@ const UserType = {
    username:String,
    password:String,
    gender:Number, //性别
-   introudction:String, //介绍
+   introduction:String, //介绍
    avatar:String,  //头像
    role:Number, //管理员1，编辑2
 };
