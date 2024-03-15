@@ -13,7 +13,9 @@ const UserService ={
       }else{
          return UserModel.updateOne({_id},{username,introduction,gender});
       }
-      
+   },
+   add:async({username,introduction,gender,avatar,password,role})=>{
+      return UserModel.create({username,introduction,gender,avatar,password,role});
    }
 }
 

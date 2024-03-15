@@ -22,7 +22,7 @@ const UserController = {
             token:token,
             username:result[0].username,
             gender:result[0].gender?result[0].gender:0,//性别0，1，2
-            introudction:result[0].introudction,//介绍
+            introduction:result[0].introduction,//介绍
             avatar:result[0].avatar,//头像
             role:result[0].role,//角色
          })
@@ -39,7 +39,7 @@ const UserController = {
             ActionType:"OK",
             data:{
                username:username,
-               introudction:introduction,
+               introduction:introduction,
                gender:Number(gender),
                avatar
             }
@@ -55,6 +55,15 @@ const UserController = {
          })
       }
    },
+   
+   add:async (req,res) =>{
+      const {username,introduction,gender,role,password} = req.body
+      const avatar = req.file?`/avataruploads/${req.file.filename}`:"";
+      await UserService.add({username,introduction,gender:Number(gender),avatar});
+      res.send({
+         ActionType:"OK",
+      })
+   }
 }
 
 module.exports = UserController;
