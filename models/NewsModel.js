@@ -6,7 +6,7 @@ const NewsType = {
    content:String,
    category:Number,
    cover:String,
-   isPublised:Number,
+   isPublish:Number,
    editTime:Date,
 };
 const NewsModel = mongoose.model("news",new Schema(NewsType));
